@@ -1,15 +1,15 @@
 package com.itheima.oschina.util;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.basic.DoubleConverter;
 import com.thoughtworks.xstream.converters.basic.FloatConverter;
 import com.thoughtworks.xstream.converters.basic.IntConverter;
 import com.thoughtworks.xstream.converters.basic.LongConverter;
 import com.thoughtworks.xstream.io.xml.DomDriver;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * xml解析工具类
@@ -27,7 +27,6 @@ public class XmlUtils {
      * 将一个xml流转换为bean实体类
      * 
      * @param type
-     * @param instance
      * @return
      */
     @SuppressWarnings("unchecked")
@@ -56,10 +55,15 @@ public class XmlUtils {
         }
         return obj;
     }
-    
+
     public static <T> T toBean(Class<T> type, byte[] bytes) {
-	if (bytes == null) return null;
-	return toBean(type, new ByteArrayInputStream(bytes));
+        if (bytes == null) return null;
+        return toBean(type, new ByteArrayInputStream(bytes));
+    }
+
+    public static <T> T toBean(Class<T> type, String str) {
+        if(str == null) return null;
+        return toBean(type, str.getBytes());
     }
 
     private static class MyIntCoverter extends IntConverter {

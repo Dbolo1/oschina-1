@@ -20,12 +20,12 @@
          android:title="Setting"
          osc:showAsAction="never"/>
 
-     <!--<item-->
-         <!--android:id="@+id/send"-->
-         <!--android:icon="@drawable/actionbar_search_icon"-->
-         <!--android:title="Send"-->
-         <!--osc:actionViewClass="android.support.v7.widget.SearchView"-->
-         <!--osc:showAsAction="collapseActionView|ifRoom"/>-->
+     <item
+         android:id="@+id/send"
+         android:icon="@drawable/actionbar_search_icon"
+         android:title="Send"
+         osc:actionViewClass="android.support.v7.widget.SearchView"
+         osc:showAsAction="collapseActionView|ifRoom"/>
 
     <!--
     showAsAction 显示模式 属性共有五个值：ifRoom、never、always、withText、collapseActionView，可以混合使用。

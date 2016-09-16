@@ -6,26 +6,24 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.itheima.oschina.R;
+import com.itheima.oschina.bean.News;
+import com.itheima.oschina.bean.NewsList;
+import com.itheima.oschina.bean.TweetsList;
+import com.itheima.oschina.util.XmlUtils;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
+import com.zhy.http.okhttp.request.RequestCall;
+
+import java.io.IOException;
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import okhttp3.Call;
 import okhttp3.Response;
-import okhttp3.internal.Util;
-
-import com.itheima.oschina.R;
-import com.itheima.oschina.bean.News;
-import com.itheima.oschina.bean.NewsDetail;
-import com.itheima.oschina.bean.NewsList;
-import com.itheima.oschina.util.XmlUtils;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
-
-import java.util.List;
 
 /**
  *
@@ -35,9 +33,8 @@ public class DefaultFragment extends Fragment {
 
     @InjectView(R.id.tv_content)
     TextView tv_content;
+    private RequestCall requestCall;
 
-    @InjectView(R.id.wv)
-    WebView wv;
 
     public DefaultFragment() {
         // Required empty public constructor
@@ -66,75 +63,115 @@ public class DefaultFragment extends Fragment {
     }
 
     private void initView(View view) {
-        WebSettings settings = wv.getSettings();
-        settings.setJavaScriptEnabled(true); // 设置支持js
 
         if (TextUtils.isEmpty(mParam1)) {
             tv_content.setText("我是一个测试用的Fragment, 我创建的时候没有传进来Bundle, 所以显示这个内容.");
         } else {
             tv_content.setText(mParam1);
         }
+//        http://www.oschina.net/action/api/news_list?pageIndex=0&catalog=1&pageSize=20
+        // 执行get请求
 
-//
-//        // 同步请求 = 同步框架 + 子线程 + Handler线程调度
-//        // 异步请求 = 异步框架
-//
-//		/* http://www.oschina.net/action/api/news_list?pageIndex=0&catalog=1&pageSize=20 */
-//        OkHttpUtils
-//                .get()
-//                .url("http://www.oschina.net/action/api/news_list")
-//                .id(101)
-//                .addParams("pageIndex", "0")
-//                .addParams("catalog", "1")
-//                .addParams("pageSize", "20")
-//                .build()
-//                .execute(callback);
-//
-//        // http://www.oschina.net/action/api/news_detail?id=64198
-//        OkHttpUtils
-//                .get()
-//                .url("http://www.oschina.net/action/api/news_detail")
-//                .id(102)
-//                .addParams("id", "64198")
-//                .build()
-//                .execute(callback);
+        // 同步框架  阻塞线程网络请求 + 子线程(线程池) + 线程切换Handler
+        requestData();
+
+        // 异步框架
+        requestDataAsync();
+
 
     }
 
+    private void requestDataAsync() {
+        // http://www.oschina.net/action/api/tweet_list?uid=0&pageIndex=0&pageSize=20
+        OkHttpUtils
+                .post()
+                .url("http://www.oschina.net/action/api/tweet_list")
+                .addParams("uid", 0 + "")
+                .addParams("pageIndex", 0 + "")
+                .addParams("pageSize", 20 + "")
+                .id(101)
+                .build()
+                .execute(callback);
+
+        OkHttpUtils
+                .get()
+                .url("http://www.oschina.net/action/api/news_list")
+                .addParams("pageIndex", 0 + "")
+                .addParams("catalog", 1 + "")
+                .addParams("pageSize", 20 + "")
+                .id(102)
+                .build()
+                .execute(callback);
+
+    }
     StringCallback callback = new StringCallback() {
         @Override
-        public void onError(Call call, Exception e, int i) {
-            e.printStackTrace();
-            Toast.makeText(getActivity(), "请求失败!", Toast.LENGTH_SHORT).show();
+        public void onError(Call call, Exception e, int id) {
+            // 错误, 主线程
         }
 
         @Override
-        public void onResponse(String s, int i) {
-            Toast.makeText(getActivity(), "请求成功!", Toast.LENGTH_SHORT).show();
-            System.out.println(s);
-//			tv_content.setText(s);
-            if (i == 101) {
-                NewsList newsList = XmlUtils.toBean(NewsList.class, s.getBytes());
-                List<News> list = newsList.getList();
+        public void onResponse(String s, int id) {
+            if(101 == id){
+                // 成功, 主线程
 
-//				tv_content.append("list.size: " + list.size() + "\n");
-//				tv_content.append("list.item: " + list.get(0).getTitle());
-            } else if (i == 102) {
-                NewsDetail newsDetail = XmlUtils.toBean(NewsDetail.class, s.getBytes());
-                String body = newsDetail.getNews().getBody();
-//				tv_content.append(body);
+                // 动弹
+                TweetsList list = XmlUtils.toBean(TweetsList.class, s);
+                tv_content.setText("list: " + list.getList().size());
 
-                // 加载一个网址
-//				wv.loadUrl("http://m.oschina.net");
-                // 加载本地文件
-//				wv.loadUrl("file:///android_asset/index.html");
-
-                // 加载html文本.html,css, js
-                wv.loadDataWithBaseURL(null, body, "text/html", "UTF-8", null);
+            }else if(102 == id){
+                // 资讯
+                // 将网络请求到的数据转成javaBean
+                NewsList newsList = XmlUtils.toBean(NewsList.class, s);
+                tv_content.setText("list: " + newsList.getList().size());
             }
-
 
         }
     };
 
+    private void requestData() {
+        new Thread(){
+            @Override
+            public void run() {
+                try {
+                    Response response = OkHttpUtils
+                            .get()
+                            .url("http://www.oschina.net/action/api/news_list")
+                            .addParams("pageIndex", 0 + "")
+                            .addParams("catalog", 1 + "")
+                            .addParams("pageSize", 20 + "")
+                            .build()
+                            .execute();
+
+                    final String string = response.body().string();
+                    System.out.println("string: " + string);
+
+                    // 将网络请求到的数据转成javaBean
+                    NewsList newsList = XmlUtils.toBean(NewsList.class, string);
+
+                    final List<News> list = newsList.getList();
+
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            tv_content.setText(list.size() + "->" + list.get(0).getTitle());
+
+                        }
+                    });
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+//        if(requestCall != null){
+//            requestCall.cancel();
+//        }
+    }
 }

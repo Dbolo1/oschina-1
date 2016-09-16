@@ -3,7 +3,6 @@ package com.itheima.oschina.ui;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -12,8 +11,6 @@ import android.support.v4.app.FragmentTabHost;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,12 +22,13 @@ import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabContentFactory;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
-import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 import com.itheima.oschina.R;
 import com.itheima.oschina.bean.Notice;
 import com.itheima.oschina.interf.BaseViewInterface;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 
 @SuppressLint("InflateParams")
@@ -179,16 +177,19 @@ public class MainActivity extends ActionBarActivity implements
 //            restoreActionBar();
 //            return true;
 //        }
-//        SearchView actionView = (SearchView) menu.getItem(3).getActionView();
+//        MenuItem item = menu.getItem(0);
+//        SearchView actionView = (SearchView) item.getActionView();
 //        actionView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 //            @Override
 //            public boolean onQueryTextSubmit(String query) {
 //                // 根据用户输入的字符串query, 查询网络/本地的数据, 更新界面
+//                System.out.println("query: " + query);
 //                return false;
 //            }
 //
 //            @Override
 //            public boolean onQueryTextChange(String newText) {
+//                System.out.println("newText: " + newText);
 //                return false;
 //            }
 //        });
@@ -199,15 +200,15 @@ public class MainActivity extends ActionBarActivity implements
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
-            case R.id.search:
-                System.out.println("搜索");
-                break;
-            case R.id.setting:
-                System.out.println("设置");
-                break;
-            case R.id.share2:
-                System.out.println("分享");
-                break;
+//            case R.id.search:
+//                System.out.println("搜索");
+//                break;
+//            case R.id.setting:
+//                System.out.println("设置");
+//                break;
+//            case R.id.share2:
+//                System.out.println("分享");
+//                break;
             default:
                 break;
         }
