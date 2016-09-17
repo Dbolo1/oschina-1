@@ -1,4 +1,4 @@
-package com.itheima.baseviewpagerfragment.viewpager;
+package com.itheima.baseviewpagerfragment.base;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

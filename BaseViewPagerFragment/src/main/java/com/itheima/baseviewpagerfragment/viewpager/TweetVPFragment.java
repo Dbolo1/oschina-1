@@ -1,6 +1,7 @@
 package com.itheima.baseviewpagerfragment.viewpager;
 
 import com.itheima.baseviewpagerfragment.adapter.NewsPagerAdapter;
+import com.itheima.baseviewpagerfragment.base.BaseViewPagerFragment;
 import com.itheima.baseviewpagerfragment.fragment.DefaultFragment;
 
 /**
