@@ -3,7 +3,7 @@ package com.itheima.baseviewpagerfragment;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.itheima.baseviewpagerfragment.viewpager.TweetVPFragment;
+import com.itheima.baseviewpagerfragment.viewpager.NewsVPFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.container, new TweetVPFragment())
+                .replace(R.id.container, new NewsVPFragment())
                 .commit();
 
     }
