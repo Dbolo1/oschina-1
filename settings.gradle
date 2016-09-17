@@ -1,1 +1,1 @@
-include ':app', ':fragmenttabhost', ':draweractivity', ':BaseViewPagerFragment'
+include ':app', ':fragmenttabhost', ':draweractivity', ':BaseViewPagerFragment', ':PagerSlidingLibrary'

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -13,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.astuetz.PagerSlidingTabStrip;
 import com.itheima.baseviewpagerfragment.R;
 
 import java.util.ArrayList;
@@ -29,8 +29,12 @@ import butterknife.ButterKnife;
  */
 public abstract class BaseViewPagerFragment extends Fragment {
 
-    @BindView(R.id.tabLayout)
-    TabLayout mTabLayout;
+//    @BindView(R.id.tabLayout)
+//    TabLayout mTabLayout;
+
+    @BindView(R.id.tabStrip)
+    PagerSlidingTabStrip tabLayout;
+
     @BindView(R.id.pager)
     ViewPager mPager;
     private NewsPagerAdapter mAdapter;
@@ -52,7 +56,8 @@ public abstract class BaseViewPagerFragment extends Fragment {
         mPager.setAdapter(mAdapter);
 
         // 3. 关联页签指示器和ViewPager
-        mTabLayout.setupWithViewPager(mPager);
+//        mTabLayout.setupWithViewPager(mPager);
+        tabLayout.setViewPager(mPager);
 
         // 4. 更新数据适配器 (特殊)
         setupAdapter(mAdapter);
@@ -86,6 +91,7 @@ public abstract class BaseViewPagerFragment extends Fragment {
         public void addTab(String title, Class<?> clazz, Bundle bundle) {
             tabs.add(new PagerTab(title, clazz, bundle));
             // 通知数据适配器更新
+            tabLayout.notifyDataSetChanged();
             notifyDataSetChanged();
         }
 
