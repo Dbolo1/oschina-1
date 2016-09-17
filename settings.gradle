@@ -1,1 +1,1 @@
-include ':app', ':fragmenttabhost', ':draweractivity'
+include ':app', ':fragmenttabhost', ':draweractivity', ':BaseViewPagerFragment'
