@@ -7,8 +7,6 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -30,6 +28,7 @@ import butterknife.InjectView;
 import com.itheima.oschina.R;
 import com.itheima.oschina.bean.Notice;
 import com.itheima.oschina.interf.BaseViewInterface;
+import com.itheima.oschina.ui.dialog.QuickOptionDialog;
 
 
 @SuppressLint("InflateParams")
@@ -194,8 +193,26 @@ public class MainActivity extends ActionBarActivity implements
 
     @Override
     public void onClick(View v) {
+        int id = v.getId();
+        switch (id) {
+            // 点击了快速操作按钮
+            case R.id.quick_option_iv:
+                showQuickOption();
+                break;
+
+            default:
+                break;
+        }
     }
 
+    // 显示快速操作界面
+    private void showQuickOption() {
+        final QuickOptionDialog dialog = new QuickOptionDialog(
+                MainActivity.this);
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.show();
+    }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {

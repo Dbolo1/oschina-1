@@ -30,7 +30,7 @@ public class ApiHttpClient {
     
     public final static String HOST_LOCAL = "10.0.3.2";
     private static String API_URL_LOCAL = "http://10.0.3.2:8080/%s";
-    
+
     public static final String DELETE = "DELETE";
     public static final String GET = "GET";
     public static final String POST = "POST";
