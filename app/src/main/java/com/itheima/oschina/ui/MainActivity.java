@@ -61,10 +61,9 @@ public class MainActivity extends ActionBarActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
-
-
 
         initView();
     }
@@ -87,6 +86,7 @@ public class MainActivity extends ActionBarActivity implements
         // 初始化底部FragmentTabHost
         mTabHost.setup(this, getSupportFragmentManager(), R.id.realtabcontent);
         if (android.os.Build.VERSION.SDK_INT > 10) {
+            // 去除分割线
             mTabHost.getTabWidget().setShowDividers(0);
         }
 
@@ -106,7 +106,6 @@ public class MainActivity extends ActionBarActivity implements
         mTabHost.setOnTabChangedListener(this);
 
     }
-
     private void initTabs() {
         MainTab[] tabs = MainTab.values();
         final int size = tabs.length;
@@ -123,8 +122,7 @@ public class MainActivity extends ActionBarActivity implements
             TextView title = (TextView) indicator.findViewById(R.id.tab_title);
             Drawable drawable = this.getResources().getDrawable(
                     mainTab.getResIcon());
-            title.setCompoundDrawablesWithIntrinsicBounds(null, drawable, null,
-                    null);
+            title.setCompoundDrawablesWithIntrinsicBounds(null, drawable, null,null);
             if (i == 2) {
                 indicator.setVisibility(View.INVISIBLE);
             }
@@ -173,26 +171,10 @@ public class MainActivity extends ActionBarActivity implements
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_activity_menu, menu);
-//        if (!mNavigationDrawerFragment.isDrawerOpen()) {
-//            restoreActionBar();
-//            return true;
-//        }
-//        MenuItem item = menu.getItem(0);
-//        SearchView actionView = (SearchView) item.getActionView();
-//        actionView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                // 根据用户输入的字符串query, 查询网络/本地的数据, 更新界面
-//                System.out.println("query: " + query);
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                System.out.println("newText: " + newText);
-//                return false;
-//            }
-//        });
+        if (!mNavigationDrawerFragment.isDrawerOpen()) {
+            restoreActionBar();
+            return true;
+        }
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -200,15 +182,9 @@ public class MainActivity extends ActionBarActivity implements
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
-//            case R.id.search:
-//                System.out.println("搜索");
-//                break;
-//            case R.id.setting:
-//                System.out.println("设置");
-//                break;
-//            case R.id.share2:
-//                System.out.println("分享");
-//                break;
+            case R.id.search:
+                break;
+
             default:
                 break;
         }

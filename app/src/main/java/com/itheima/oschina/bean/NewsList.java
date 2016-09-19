@@ -1,9 +1,9 @@
 package com.itheima.oschina.bean;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 /**
  * 新闻列表实体类
@@ -12,6 +12,7 @@ import java.util.List;
  * @created 2014年9月27日 下午5:55:58
  *
  */
+@SuppressWarnings("serial")
 @XStreamAlias("oschina")
 public class NewsList extends Entity implements ListEntity<News> {
 	
@@ -23,7 +24,7 @@ public class NewsList extends Entity implements ListEntity<News> {
 	
 	public final static int CATALOG_WEEK = 4;
 	public final static int CATALOG_MONTH = 5;
-
+	
 	@XStreamAlias("catalog")
 	private int catalog;
 	

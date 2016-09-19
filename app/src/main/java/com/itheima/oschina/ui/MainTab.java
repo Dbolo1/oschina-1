@@ -2,11 +2,12 @@ package com.itheima.oschina.ui;
 
 import com.itheima.oschina.R;
 import com.itheima.oschina.fragment.DefaultFragment;
+import com.itheima.oschina.viewpagerfragment.NewsViewPagerFragment;
 
 public enum MainTab {
 
 	NEWS(0, R.string.main_tab_name_news, R.drawable.tab_icon_new,
-			DefaultFragment.class),
+			NewsViewPagerFragment.class),
 
 	TWEET(1, R.string.main_tab_name_tweet, R.drawable.tab_icon_tweet,
 			DefaultFragment.class),

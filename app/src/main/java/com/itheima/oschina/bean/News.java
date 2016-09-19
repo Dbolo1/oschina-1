@@ -14,6 +14,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
  * @created 2014年9月28日 上午10:16:59
  *
  */
+@SuppressWarnings("serial")
 @XStreamAlias("news")
 public class News extends Entity {
 	
@@ -161,7 +162,14 @@ public class News extends Entity {
 	public void setRelatives(List<Relative> relatives) {
 		this.relatives = relatives;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "News{" +
+				"title='" + title + '\'' +
+				'}';
+	}
+
 	@XStreamAlias("newstype")
 	public class NewsType implements Serializable{
 		@XStreamAlias("type")

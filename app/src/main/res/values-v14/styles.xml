@@ -25,10 +25,9 @@
         <item name="android:windowBackground">@color/window_background</item>
 <!--         设置ActionBar样式 -->
         <item name="actionBarStyle">@style/ActionBarBaseStyle</item>
-        <item name="actionBarSize">50dp</item>
+        <item name="actionBarSize">48dp</item>
 <!--         弹出菜单的样式 -->
-        <item name="android:popupMenuStyle">@style/ListPopupWindow</item>
-        <item name="popupMenuStyle">@style/mylistPopupWindowStyle</item>
+        <!--<item name="android:popupMenuStyle">@style/ListPopupWindow</item>-->
 <!--         更多菜单的按钮样式 , 针对没有菜单按键的设备-->
         <item name="actionOverflowButtonStyle">@style/OverflowButton</item>
 <!--         ActionBar条目背景选择器 -->
@@ -37,11 +36,10 @@
         <item name="actionMenuTextColor">@color/white</item>
 <!--         弹出菜单ListView的样式 -->
         <item name="dropDownListViewStyle">@style/SpinnerDropDownListView</item>
-
+        <item name="popupMenuStyle">@style/mylistPopupWindowStyle</item>
     </style>
     
     <style name="DialogBaseTheme" parent="@style/Theme.AppCompat.DialogWhenLarge">
-
     </style>
     
 

@@ -34,7 +34,7 @@
         android:xlargeScreens="true" />
 
     <application
-        android:allowBackup="true"
+        android:name="com.itheima.oschina.AppContext"
         android:icon="@drawable/ic_launcher"
         android:theme="@style/ActionBarBaseTheme"
         android:label="@string/app_name" >
