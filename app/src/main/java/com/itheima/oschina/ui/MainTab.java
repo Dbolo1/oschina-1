@@ -2,6 +2,7 @@ package com.itheima.oschina.ui;
 
 import com.itheima.oschina.R;
 import com.itheima.oschina.fragment.DefaultFragment;
+import com.itheima.oschina.fragment.ExploreFragment;
 import com.itheima.oschina.viewpagerfragment.NewsViewPagerFragment;
 
 public enum MainTab {
@@ -16,7 +17,7 @@ public enum MainTab {
 			null),
 
 	EXPLORE(3, R.string.main_tab_name_explore, R.drawable.tab_icon_explore,
-			DefaultFragment.class),
+			ExploreFragment.class),
 			
 	ME(4, R.string.main_tab_name_my, R.drawable.tab_icon_me,
 			DefaultFragment.class);

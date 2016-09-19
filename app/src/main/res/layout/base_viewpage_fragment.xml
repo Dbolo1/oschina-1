@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <!-- 导航标题栏 -->
+
+    <com.astuetz.PagerSlidingTabStrip
+        android:id="@+id/pager_tabstrip"
+        android:layout_width="match_parent"
+        android:layout_height="48dip"
+        android:textColor="#999999"
+        android:textSize="17dp"
+        app:pstsIndicatorColor="@color/main_green"
+        app:pstsSelectedTextColor="@color/main_green"
+        app:pstsDividerColor="@color/transparent"
+        app:pstsTabBackground="@color/transparent"
+        app:pstsScrollOffset="30dp"
+        app:pstsIndicatorHeight="4dp"
+        app:pstsUnderlineHeight="1dp"
+        app:pstsShouldExpand="true"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        style="@style/fill_fill"
+        android:layout_below="@id/pager_tabstrip">
+    </android.support.v4.view.ViewPager>
+
+    <com.itheima.oschina.ui.empty.EmptyLayout
+        android:id="@+id/error_layout"
+        style="@style/fill_fill"
+        android:visibility="gone" />
+
+</RelativeLayout>
