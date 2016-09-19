@@ -182,20 +182,14 @@ public class OSChinaApi {
     }
 
     public static void getActiveList(int uid, int catalog, int page,
-            AsyncHttpResponseHandler handler) {
+            ApiHttpClient.OnHttpResultHandler handler) {
     	
 //    	http://www.oschina.net/action/api/active_list?uid=993896&pageIndex=0&catalog=1&pageSize=20 
 //    	本地路径:oschina/list/active_list/page0.xml
         RequestParams params = new RequestParams();
         params.put("uid", uid);
-        ApiHttpClient.getLocal(String.format("oschina/list/active_list%d/page%d.xml", catalog, page), params, handler);
-    	
-//        RequestParams params = new RequestParams();
-//        params.put("uid", uid);
-//        params.put("catalog", catalog);
-//        params.put("pageIndex", page);
-//        params.put("pageSize", AppContext.PAGE_SIZE);
-//        ApiHttpClient.get("action/api/active_list", params, handler);
+        ApiHttpClient.get(String.format("oschina/list/active_list%d/page%d.xml", catalog, page), handler);
+
     }
 
     public static void getFriendList(int uid, int relation, int page,
@@ -358,13 +352,14 @@ public class OSChinaApi {
      * 获取新闻明细
      * @param handler
      */
-    public static void getNewsDetail(int id, AsyncHttpResponseHandler handler) {
+    public static void getNewsDetail(int id, ApiHttpClient.OnHttpResultHandler handler) {
 //        RequestParams params = new RequestParams("id", id);
 //        ApiHttpClient.get("action/api/news_detail", params, handler);
-        
+
         RequestParams params = new RequestParams();
         String path = "oschina/detail/news_detail/" + id + ".xml";
-        ApiHttpClient.getLocal(path, params, handler);
+
+        ApiHttpClient.get(path, handler);
     }
 
     public static void getBlogDetail(int id, AsyncHttpResponseHandler handler) {

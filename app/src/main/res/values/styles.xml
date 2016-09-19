@@ -346,4 +346,13 @@
         <item name="android:windowBackground">@color/white40</item>
         <item name="android:windowAnimationStyle">@style/dialog_animation</item>
     </style>
+
+    <style name="user_face_image">
+        <item name="android:layout_width">40.0dip</item>
+        <item name="android:layout_height">40.0dip</item>
+        <item name="android:padding">1.0dip</item>
+        <item name="android:clickable">true</item>
+        <item name="android:src">@drawable/widget_dface</item>
+    </style>
+
 </resources>

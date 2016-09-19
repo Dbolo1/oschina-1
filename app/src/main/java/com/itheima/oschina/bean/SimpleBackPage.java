@@ -2,6 +2,7 @@ package com.itheima.oschina.bean;
 
 
 import com.itheima.oschina.R;
+import com.itheima.oschina.fragment.ActiveFragment;
 import com.itheima.oschina.fragment.DefaultFragment;
 
 public enum SimpleBackPage {
@@ -23,7 +24,7 @@ public enum SimpleBackPage {
 //    MY_INFORMATION(7, R.string.actionbar_title_my_information,
 //            MyInformationFragment.class),
 
-    MY_ACTIVE(8, R.string.actionbar_title_active, DefaultFragment.class),
+    MY_ACTIVE(8, R.string.actionbar_title_active, ActiveFragment.class),
 
 //    MY_MES(9, R.string.actionbar_title_mes, NoticeViewPagerFragment.class),
 //
@@ -144,7 +145,9 @@ public enum SimpleBackPage {
     }
 
     public static SimpleBackPage getPageByValue(int val) {
-        for (SimpleBackPage p : values()) {
+        SimpleBackPage[] values = values();
+
+        for (SimpleBackPage p : values) {
             if (p.getValue() == val)
                 return p;
         }

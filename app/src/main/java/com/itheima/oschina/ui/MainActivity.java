@@ -4,6 +4,7 @@ package com.itheima.oschina.ui;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -148,6 +149,11 @@ public class MainActivity extends ActionBarActivity implements
     }
 
     @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+    }
+
+    @Override
     public void initData() {
 
     }
@@ -207,10 +213,9 @@ public class MainActivity extends ActionBarActivity implements
 
     // 显示快速操作界面
     private void showQuickOption() {
-        final QuickOptionDialog dialog = new QuickOptionDialog(
-                MainActivity.this);
-        dialog.setCancelable(true);
-        dialog.setCanceledOnTouchOutside(true);
+        final QuickOptionDialog dialog = new QuickOptionDialog(MainActivity.this);
+        dialog.setCancelable(true); // 可以取消
+        dialog.setCanceledOnTouchOutside(true); // 触摸外部可以取消
         dialog.show();
     }
 

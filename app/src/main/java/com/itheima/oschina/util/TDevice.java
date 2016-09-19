@@ -259,12 +259,12 @@ public class TDevice {
     }
 
     public static void hideSoftKeyboard(View view) {
-	if (view == null)
-	    return;
-	((InputMethodManager) BaseApplication.context().getSystemService(
-		Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(
-		view.getWindowToken(), 0);
-    }
+		if (view == null)
+			return;
+		((InputMethodManager) BaseApplication.context().getSystemService(
+				Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(
+				view.getWindowToken(), 0);
+	}
 
     public static boolean isLandscape() {
 	boolean flag;

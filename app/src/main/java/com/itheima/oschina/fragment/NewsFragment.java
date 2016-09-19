@@ -15,6 +15,7 @@ import com.itheima.oschina.bean.News;
 import com.itheima.oschina.bean.NewsList;
 import com.itheima.oschina.interf.OnTabReselectListener;
 import com.itheima.oschina.ui.empty.EmptyLayout;
+import com.itheima.oschina.util.UIHelper;
 import com.itheima.oschina.util.XmlUtils;
 
 /**
@@ -82,10 +83,10 @@ public class NewsFragment extends BaseListFragment<News> implements
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position,
-            long id) {
+                            long id) {
         News news = mAdapter.getItem(position);
         if (news != null) {
-//            UIHelper.showNewsRedirect(view.getContext(), news);
+            UIHelper.showNewsRedirect(view.getContext(), news);
 
             // 放入已读列表
             saveToReadedList(view, NewsList.PREF_READED_NEWS_LIST, news.getId()

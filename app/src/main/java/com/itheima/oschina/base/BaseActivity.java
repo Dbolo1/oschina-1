@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import butterknife.ButterKnife;
@@ -58,7 +59,7 @@ public abstract class BaseActivity extends AppCompatActivity implements  OnClick
         mActionBar = getSupportActionBar();
         mInflater = getLayoutInflater();
         
-        if (hasActionBar()) {
+        if (hasActionBar()) { // Hook 钩子函数
             initActionBar(mActionBar);
         }
 
@@ -104,14 +105,15 @@ public abstract class BaseActivity extends AppCompatActivity implements  OnClick
     protected void init(Bundle savedInstanceState) {}
 
     protected void initActionBar(ActionBar actionBar) {
-        if (actionBar == null)
-            return;
-        if (hasBackButton()) {
+        if (actionBar == null) return;
+
+        if (hasBackButton()) { // Hook 钩子函数
         	// 让ActionBar自定义内容
             mActionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+
             int layoutRes = getActionBarCustomView();
-            
-         // ------------------------------------------------- 创建自定义布局 ↓  
+
+         // ------------------------------------------------- 创建自定义布局 ↓
             View view = inflateView(layoutRes == 0 ? R.layout.actionbar_custom_backtitle
                     : layoutRes);
             View back = view.findViewById(R.id.btn_back);

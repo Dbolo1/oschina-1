@@ -31,13 +31,13 @@ public class SimpleBackActivity extends BaseActivity implements
     protected int mPageValue = -1;
 
     @Override
-    protected int getLayoutId() {
-        return R.layout.activity_simple_fragment;
+    protected boolean hasBackButton() {
+        return true;
     }
 
     @Override
-    protected boolean hasBackButton() {
-        return true;
+    protected int getLayoutId() {
+        return R.layout.activity_simple_fragment;
     }
 
     @Override

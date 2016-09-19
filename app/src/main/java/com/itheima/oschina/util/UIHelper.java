@@ -24,7 +24,9 @@ import android.widget.ZoomButtonsController;
 
 import com.itheima.oschina.AppConfig;
 import com.itheima.oschina.AppContext;
+import com.itheima.oschina.bean.News;
 import com.itheima.oschina.bean.SimpleBackPage;
+import com.itheima.oschina.ui.DetailActivity;
 import com.itheima.oschina.ui.SimpleBackActivity;
 
 
@@ -39,7 +41,8 @@ public class UIHelper {
 
     /** 全局web样式 */
     // 链接样式文件，代码块高亮的处理
-    public final static String linkCss = "<script type=\"text/javascript\" src=\"file:///android_asset/shCore.js\"></script>"
+    public final static String linkCss =
+            "<script type=\"text/javascript\" src=\"file:///android_asset/shCore.js\"></script>"
             + "<script type=\"text/javascript\" src=\"file:///android_asset/brush.js\"></script>"
             + "<script type=\"text/javascript\" src=\"file:///android_asset/client.js\"></script>"
             + "<link rel=\"stylesheet\" type=\"text/css\" href=\"file:///android_asset/shThemeDefault.css\">"
@@ -75,22 +78,22 @@ public class UIHelper {
 //        Intent intent = new Intent(context, TeamMainActivity.class);
 //        context.startActivity(intent);
 //    }
-//
-//    /**
-//     * 显示新闻详情
-//     * 
-//     * @param context
-//     * @param newsId
-//     */
-//    public static void showNewsDetail(Context context, int newsId,
-//            int commentCount) {
-//        Intent intent = new Intent(context, DetailActivity.class);
-//        intent.putExtra("news_id", newsId);
-//        intent.putExtra("comment_count", commentCount);
-//        intent.putExtra(DetailActivity.BUNDLE_KEY_DISPLAY_TYPE,
-//                DetailActivity.DISPLAY_NEWS);
-//        context.startActivity(intent);
-//    }
+
+    /**
+     * 显示新闻详情
+     * 
+     * @param context
+     * @param newsId
+     */
+    public static void showNewsDetail(Context context, int newsId,
+            int commentCount) {
+        Intent intent = new Intent(context, DetailActivity.class);
+        intent.putExtra("news_id", newsId);
+        intent.putExtra("comment_count", commentCount);
+        intent.putExtra(DetailActivity.BUNDLE_KEY_DISPLAY_TYPE,
+                DetailActivity.DISPLAY_NEWS);
+        context.startActivity(intent);
+    }
 
     /**
      * 显示博客详情
@@ -181,50 +184,50 @@ public class UIHelper {
 //        context.startActivity(intent);
 //    }
 //
-//    /**
-//     * 新闻超链接点击跳转
-//     * 
-//     * @param context
-//     * @param newsId
-//     * @param newsType
-//     * @param objId
-//     */
-//    public static void showNewsRedirect(Context context, News news) {
-//        String url = news.getUrl();
-//        // 如果是活动则直接跳转活动详情页面
-//        String eventUrl = news.getNewType().getEventUrl();
-//        if (!StringUtils.isEmpty(eventUrl)) {
-//            showEventDetail(context,
-//                    StringUtils.toInt(news.getNewType().getAttachment()));
-//            return;
-//        }
-//        // url为空-旧方法
-//        if (StringUtils.isEmpty(url)) {
-//            int newsId = news.getId();
-//            int newsType = news.getNewType().getType();
-//            String objId = news.getNewType().getAttachment();
-//            switch (newsType) {
-//            case News.NEWSTYPE_NEWS:
-//                showNewsDetail(context, newsId, news.getCommentCount());
+    /**
+     * 新闻超链接点击跳转
+     * 
+     * @param context
+     * @param newsId
+     * @param newsType
+     * @param objId
+     */
+    public static void showNewsRedirect(Context context, News news) {
+        String url = news.getUrl();
+        // 如果是活动则直接跳转活动详情页面
+        String eventUrl = news.getNewType().getEventUrl();
+        if (!StringUtils.isEmpty(eventUrl)) {
+            showEventDetail(context,
+                    StringUtils.toInt(news.getNewType().getAttachment()));
+            return;
+        }
+        // url为空-旧方法
+        if (StringUtils.isEmpty(url)) {
+            int newsId = news.getId();
+            int newsType = news.getNewType().getType();
+            String objId = news.getNewType().getAttachment();
+            switch (newsType) {
+            case News.NEWSTYPE_NEWS:
+                showNewsDetail(context, newsId, news.getCommentCount());
+                break;
+//            case News.NEWSTYPE_SOFTWARE:
+//                showSoftwareDetail(context, objId);
 //                break;
-////            case News.NEWSTYPE_SOFTWARE:
-////                showSoftwareDetail(context, objId);
-////                break;
-////            case News.NEWSTYPE_POST:
-////                showPostDetail(context, StringUtils.toInt(objId),
-////                        news.getCommentCount());
-////                break;
-////            case News.NEWSTYPE_BLOG:
-////                showBlogDetail(context, StringUtils.toInt(objId),
-////                        news.getCommentCount());
-////                break;
-//            default:
+//            case News.NEWSTYPE_POST:
+//                showPostDetail(context, StringUtils.toInt(objId),
+//                        news.getCommentCount());
 //                break;
-//            }
-//        } else {
-//            showUrlRedirect(context, url);
-//        }
-//    }
+//            case News.NEWSTYPE_BLOG:
+//                showBlogDetail(context, StringUtils.toInt(objId),
+//                        news.getCommentCount());
+//                break;
+            default:
+                break;
+            }
+        } else {
+            showUrlRedirect(context, url);
+        }
+    }
 //
 //    /**
 //     * 动态点击跳转到相关新闻、帖子等
@@ -268,17 +271,19 @@ public class UIHelper {
     
     public static void initWebView(WebView webView) {
         WebSettings settings = webView.getSettings();
-        settings.setDefaultFontSize(15);
-        settings.setJavaScriptEnabled(true);
-        settings.setSupportZoom(true);
-        settings.setBuiltInZoomControls(true);
+        settings.setDefaultFontSize(15); // 设置默认字体
+        settings.setJavaScriptEnabled(true); // 设置支持js脚本
+        settings.setSupportZoom(true); // 支持自动放大缩小适配
+        settings.setBuiltInZoomControls(true); // 支持触摸放大缩小
         int sysVersion = Build.VERSION.SDK_INT;
         if (sysVersion >= 11) {
-            settings.setDisplayZoomControls(false);
+            settings.setDisplayZoomControls(false); // 隐藏放大缩小按钮
         } else {
             ZoomButtonsController zbc = new ZoomButtonsController(webView);
-            zbc.getZoomControls().setVisibility(View.GONE);
+            zbc.getZoomControls().setVisibility(View.GONE);// 隐藏放大缩小按钮
         }
+
+        // WebView设置客户端
         webView.setWebViewClient(UIHelper.getWebViewClient());
     }
 //
@@ -308,8 +313,17 @@ public class UIHelper {
     public static WebViewClient getWebViewClient() {
 
         return new WebViewClient() {
+
+
+            /**
+             * 当WebView中任何链接被点击, 此方法被调用
+             * @param view WebView
+             * @param url 被点击的链接
+             * @return
+             */
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                // 由自己处理跳转
                 showUrlRedirect(view.getContext(), url);
                 return true;
             }

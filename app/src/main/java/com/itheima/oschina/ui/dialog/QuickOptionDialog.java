@@ -52,9 +52,11 @@ public class QuickOptionDialog extends Dialog implements
         operatingAnim.setInterpolator(lin);
 
         mClose.startAnimation(operatingAnim);
-
         mClose.setOnClickListener(this);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
+
         contentView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -76,10 +78,14 @@ public class QuickOptionDialog extends Dialog implements
         super.onCreate(bundle);
         getWindow().setGravity(Gravity.BOTTOM);
 
+        // 当前窗体的宽度设置为屏幕的宽度
         WindowManager m = getWindow().getWindowManager();
         Display d = m.getDefaultDisplay();
+
+        // 获取当前的布局参数
         WindowManager.LayoutParams p = getWindow().getAttributes();
-        p.width = d.getWidth();
+        p.width = d.getWidth(); // 修改宽度
+        // 设置修改后的LayoutParams
         getWindow().setAttributes(p);
     }
 
