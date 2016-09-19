@@ -1,15 +1,18 @@
 package com.itheima.baseviewpagerfragment.fragment;
 
 import android.support.annotation.NonNull;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
-import com.itheima.baseviewpagerfragment.adapter.NewsHolderAdapter;
 import com.itheima.baseviewpagerfragment.api.NetApi;
 import com.itheima.baseviewpagerfragment.base.BaseListAdapter;
 import com.itheima.baseviewpagerfragment.base.BaseListFragment;
+import com.itheima.baseviewpagerfragment.base.BasicHolderAdapter;
 import com.itheima.baseviewpagerfragment.domain.ListEntity;
 import com.itheima.baseviewpagerfragment.domain.News;
 import com.itheima.baseviewpagerfragment.domain.NewsList;
+import com.itheima.baseviewpagerfragment.holder.NewsHolder;
 import com.itheima.baseviewpagerfragment.utils.XmlUtils;
 
 /**
@@ -19,8 +22,6 @@ import com.itheima.baseviewpagerfragment.utils.XmlUtils;
  * 描述：     TODO
  */
 public class NewsListFragment extends BaseListFragment<News> {
-
-
     int pageIndex = 0; // 页索引
     int catalog = 1; // 分类
     int pageSize = 20; // 页大小
@@ -28,7 +29,7 @@ public class NewsListFragment extends BaseListFragment<News> {
     @NonNull
     @Override
     public BaseListAdapter<News> getListAdapter() {
-        return new NewsHolderAdapter();
+        return new BasicHolderAdapter<News>(NewsHolder.class);
     }
 
     @Override
@@ -42,4 +43,7 @@ public class NewsListFragment extends BaseListFragment<News> {
         return XmlUtils.toBean(NewsList.class, s);
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    }
 }

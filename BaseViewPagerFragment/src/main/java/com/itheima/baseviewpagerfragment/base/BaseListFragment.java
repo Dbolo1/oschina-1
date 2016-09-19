@@ -10,6 +10,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -30,7 +31,9 @@ import okhttp3.Call;
  * 创建时间:  2016/9/17.
  * 描述：     TODO
  */
-public abstract class BaseListFragment<T extends Entity> extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
+public abstract class BaseListFragment<T extends Entity> extends Fragment
+        implements SwipeRefreshLayout.OnRefreshListener,
+        AdapterView.OnItemClickListener{
 
     @BindView(R.id.lv)
     ListView mLv;
@@ -53,6 +56,8 @@ public abstract class BaseListFragment<T extends Entity> extends Fragment implem
         // 2. 初始化控件
         mSwipeRefreshLayout.setColorSchemeColors(Color.RED, Color.BLUE, Color.GREEN);
         mSwipeRefreshLayout.setOnRefreshListener(this);
+
+        mLv.setOnItemClickListener(this);
 
         // 3. 创建数据适配器 (特殊)
         adapter = getListAdapter();
@@ -100,7 +105,9 @@ public abstract class BaseListFragment<T extends Entity> extends Fragment implem
         }
     };
 
-
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    }
 
     @Override
     public void onRefresh() {

@@ -39,8 +39,8 @@ public abstract class BaseListAdapter<T> extends BaseAdapter {
     }
 
     @Override
-    public long getItemId(int position) {
-        return position;
+    public long getItemId(int p) {
+        return p;
     }
 
 

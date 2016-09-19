@@ -63,7 +63,7 @@ public class NewsListFragment_ extends Fragment implements SwipeRefreshLayout.On
         // 4. 设置数据适配器
         mLv.setAdapter(adapter);
 
-        // 5. 请求网络数据
+        // 5. 请求网络数据 (特殊)
         Toast.makeText(getContext(), "开始请求数据~", Toast.LENGTH_SHORT).show();
         // http://www.oschina.net/action/api/news_list?pageIndex=0&catalog=1&pageSize=20
         OkHttpUtils

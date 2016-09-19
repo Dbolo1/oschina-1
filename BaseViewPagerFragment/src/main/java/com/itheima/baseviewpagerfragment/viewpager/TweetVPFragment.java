@@ -1,6 +1,6 @@
 package com.itheima.baseviewpagerfragment.viewpager;
 
-import com.itheima.baseviewpagerfragment.adapter.NewsPagerAdapter;
+import com.itheima.baseviewpagerfragment.adapter.BasicPagerAdapter;
 import com.itheima.baseviewpagerfragment.base.BaseViewPagerFragment;
 import com.itheima.baseviewpagerfragment.fragment.DefaultFragment;
 
@@ -12,7 +12,7 @@ import com.itheima.baseviewpagerfragment.fragment.DefaultFragment;
  */
 public class TweetVPFragment extends BaseViewPagerFragment {
     @Override
-    protected void setupAdapter(NewsPagerAdapter adapter) {
+    protected void setupAdapter(BasicPagerAdapter adapter) {
 //        String[] array = getResources().getStringArray(R.array.tweets_viewpage_arrays);
 
         adapter.addTab("最新", DefaultFragment.class, getBundle("最新动弹的参数"));

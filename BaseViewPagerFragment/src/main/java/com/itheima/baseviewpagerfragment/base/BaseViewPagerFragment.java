@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.itheima.baseviewpagerfragment.R;
-import com.itheima.baseviewpagerfragment.adapter.NewsPagerAdapter;
+import com.itheima.baseviewpagerfragment.adapter.BasicPagerAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,7 +32,7 @@ public abstract class BaseViewPagerFragment extends Fragment {
 
     @BindView(R.id.pager)
     ViewPager mPager;
-    private NewsPagerAdapter mAdapter;
+    private BasicPagerAdapter mAdapter;
 
     @Nullable
     @Override
@@ -47,7 +47,7 @@ public abstract class BaseViewPagerFragment extends Fragment {
         ButterKnife.bind(this, view);
 
         // 2. 创建并设置数据适配器
-        mAdapter = new NewsPagerAdapter(mPager, getChildFragmentManager());
+        mAdapter = new BasicPagerAdapter(mPager, getChildFragmentManager());
 
         // 3. 关联页签指示器和ViewPager
         mTabLayout.setupWithViewPager(mPager);
@@ -58,7 +58,7 @@ public abstract class BaseViewPagerFragment extends Fragment {
 
     }
 
-    protected abstract void setupAdapter(NewsPagerAdapter adapter);
+    protected abstract void setupAdapter(BasicPagerAdapter adapter);
 //        mAdapter.addTab("资讯", DefaultFragment.class, getBundle("咨讯的参数"));
 //        mAdapter.addTab("热点", DefaultFragment.class, getBundle("热点的参数"));
 //        mAdapter.addTab("博客", DefaultFragment.class, getBundle("博客的参数"));

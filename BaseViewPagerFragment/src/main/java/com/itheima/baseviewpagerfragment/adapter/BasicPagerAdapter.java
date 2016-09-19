@@ -4,18 +4,18 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewsPagerAdapter extends FragmentStatePagerAdapter {
+public class BasicPagerAdapter extends FragmentPagerAdapter {
 
     List<PagerTab> tabs = new ArrayList<>();
     private final Context mContext;
 
-    public NewsPagerAdapter(ViewPager mPager, FragmentManager fm) {
+    public BasicPagerAdapter(ViewPager mPager, FragmentManager fm) {
         super(fm);
         mContext = mPager.getContext();
 
