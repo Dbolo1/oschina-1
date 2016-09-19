@@ -6,7 +6,7 @@ android {
     buildToolsVersion "23.0.3"
 
     defaultConfig {
-        applicationId "com.itheima.baseviewpagerfragment"
+        applicationId "com.itheima.baseviewpagerfragment1"
         minSdkVersion 14
         targetSdkVersion 23
         versionCode 1
