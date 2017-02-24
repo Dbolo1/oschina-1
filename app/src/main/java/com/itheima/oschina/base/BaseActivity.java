@@ -1,5 +1,17 @@
 package com.itheima.oschina.base;
 
+import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBar.LayoutParams;
+import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Spinner;
+import android.widget.TextView;
+
 import com.itheima.oschina.AppManager;
 import com.itheima.oschina.R;
 import com.itheima.oschina.interf.BaseViewInterface;
@@ -8,19 +20,6 @@ import com.itheima.oschina.util.TDevice;
 
 import org.kymjs.kjframe.utils.StringUtils;
 
-import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBar.LayoutParams;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.LinearLayout;
-import android.widget.Spinner;
-import android.widget.TextView;
 import butterknife.ButterKnife;
 
 /**
@@ -54,7 +53,7 @@ public abstract class BaseActivity extends AppCompatActivity implements  OnClick
         }
         onBeforeSetContentLayout();
         if (getLayoutId() != 0) {
-            setContentView(getLayoutId());
+            setContentView(getLayoutId()); // Hook 钩子函数
         }
         mActionBar = getSupportActionBar();
         mInflater = getLayoutInflater();

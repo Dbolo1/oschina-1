@@ -1,7 +1,5 @@
 package com.itheima.oschina.ui.dialog;
 
-import com.itheima.oschina.R;
-
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
@@ -10,12 +8,13 @@ import android.view.Display;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
+
+import com.itheima.oschina.R;
 
 public class QuickOptionDialog extends Dialog implements
         View.OnClickListener {
@@ -36,14 +35,10 @@ public class QuickOptionDialog extends Dialog implements
     @SuppressLint("InflateParams")
     private QuickOptionDialog(Context context, int defStyle) {
         super(context, defStyle);
-        View contentView = getLayoutInflater().inflate(
-                R.layout.dialog_quick_option, null);
-        contentView.findViewById(R.id.ly_quick_option_text).setOnClickListener(
-                this);
-        contentView.findViewById(R.id.ly_quick_option_album)
-                .setOnClickListener(this);
-        contentView.findViewById(R.id.ly_quick_option_photo)
-                .setOnClickListener(this);
+        View contentView = getLayoutInflater().inflate(R.layout.dialog_quick_option, null);
+        contentView.findViewById(R.id.ly_quick_option_text).setOnClickListener(this);
+        contentView.findViewById(R.id.ly_quick_option_album).setOnClickListener(this);
+        contentView.findViewById(R.id.ly_quick_option_photo).setOnClickListener(this);
         mClose = (ImageView) contentView.findViewById(R.id.iv_close);
 
         Animation operatingAnim = AnimationUtils.loadAnimation(getContext(),
@@ -76,6 +71,7 @@ public class QuickOptionDialog extends Dialog implements
     @Override
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
+        // 设置dialog显示在屏幕底部
         getWindow().setGravity(Gravity.BOTTOM);
 
         // 当前窗体的宽度设置为屏幕的宽度

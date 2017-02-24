@@ -15,6 +15,8 @@ import com.itheima.datarequest.api.PersistentCookieStore;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.cookie.CookieJarImpl;
 
 import java.io.IOException;
 import java.net.CookieManager;
@@ -23,19 +25,20 @@ import java.net.CookiePolicy;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.CookieJar;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class RequestFragment2 extends Fragment {
+public class RequestFragment22 extends Fragment {
 
 
     @BindView(R.id.tv_content)
     TextView mTvContent;
     private OkHttpClient httpClient;
 
-    public RequestFragment2() {
+    public RequestFragment22() {
         // Required empty public constructor
     }
 
@@ -97,13 +100,12 @@ public class RequestFragment2 extends Fragment {
     }
 
     private void logout() {
-//        OkHttpClient okHttpClient = OkHttpUtils.getInstance().getOkHttpClient();
-//        CookieJar cookieJar = okHttpClient.cookieJar();
-
-//        CookieJar cookieJar = httpClient.cookieJar();
-//        if(cookieJar instanceof CookieJarImpl){
-//            ((CookieJarImpl) cookieJar).getCookieStore().removeAll();
-//        }
+        okhttp3.OkHttpClient okHttpClient = OkHttpUtils.getInstance().getOkHttpClient();
+        CookieJar cookieJar = okHttpClient.cookieJar();
+        if(cookieJar instanceof CookieJarImpl){
+            ((CookieJarImpl) cookieJar).getCookieStore().removeAll();
+        }
+//        okhttp3.OkHttpClient okHttpClient = OkHttpUtils.getInstance().getOkHttpClient();
     }
 
     private void login() {

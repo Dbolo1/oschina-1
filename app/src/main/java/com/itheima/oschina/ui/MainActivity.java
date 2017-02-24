@@ -23,13 +23,14 @@ import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabContentFactory;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
-import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 import com.itheima.oschina.R;
 import com.itheima.oschina.bean.Notice;
 import com.itheima.oschina.interf.BaseViewInterface;
 import com.itheima.oschina.ui.dialog.QuickOptionDialog;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 
 @SuppressLint("InflateParams")

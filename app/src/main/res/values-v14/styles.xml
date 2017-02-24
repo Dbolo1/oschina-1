@@ -20,6 +20,7 @@
         <item name="subtitleTextStyle">@style/SubTitle</item>
         <!-- 设置该属性解决两端空白部分-->
         <item name="contentInsetStart">0dp</item>
+        <item name="contentInsetEnd">0dp</item>
     </style>
 
     <style name="ActionBarBaseTheme" parent="@style/Theme.AppCompat.Light">

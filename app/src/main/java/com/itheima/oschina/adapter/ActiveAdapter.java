@@ -1,25 +1,5 @@
 package com.itheima.oschina.adapter;
 
-import com.itheima.oschina.R;
-import com.itheima.oschina.base.ListBaseAdapter;
-import com.itheima.oschina.bean.Active;
-import com.itheima.oschina.bean.Active.ObjectReply;
-import com.itheima.oschina.bean.Tweet;
-import com.itheima.oschina.emoji.InputHelper;
-//import com.itheima.oschina.ui.ImagePreviewActivity;
-import com.itheima.oschina.util.ImageUtils;
-import com.itheima.oschina.util.StringUtils;
-import com.itheima.oschina.util.UIHelper;
-import com.itheima.oschina.widget.AvatarView;
-import com.itheima.oschina.widget.MyLinkMovementMethod;
-import com.itheima.oschina.widget.MyURLSpan;
-import com.itheima.oschina.widget.TweetTextView;
-
-import org.kymjs.kjframe.KJBitmap;
-import org.kymjs.kjframe.bitmap.BitmapCallBack;
-import org.kymjs.kjframe.bitmap.BitmapHelper;
-import org.kymjs.kjframe.utils.DensityUtils;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -34,14 +14,37 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.itheima.oschina.R;
+import com.itheima.oschina.base.ListBaseAdapter;
+import com.itheima.oschina.bean.Active;
+import com.itheima.oschina.bean.Active.ObjectReply;
+import com.itheima.oschina.bean.Tweet;
+import com.itheima.oschina.emoji.InputHelper;
+import com.itheima.oschina.util.ImageUtils;
+import com.itheima.oschina.util.StringUtils;
+import com.itheima.oschina.util.UIHelper;
+import com.itheima.oschina.widget.AvatarView;
+import com.itheima.oschina.widget.MyLinkMovementMethod;
+import com.itheima.oschina.widget.MyURLSpan;
+import com.itheima.oschina.widget.TweetTextView;
+
+import org.kymjs.kjframe.KJBitmap;
+import org.kymjs.kjframe.bitmap.BitmapCallBack;
+import org.kymjs.kjframe.bitmap.BitmapHelper;
+import org.kymjs.kjframe.utils.DensityUtils;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+
+//import com.itheima.oschina.ui.ImagePreviewActivity;
 
 public class ActiveAdapter extends ListBaseAdapter {
     private final static String AT_HOST_PRE = "http://my.oschina.net";
     private final static String MAIN_HOST = "http://www.oschina.net";
 
-    public ActiveAdapter() {}
+    public ActiveAdapter() {
+    }
 
     private Bitmap recordBitmap;
     private final KJBitmap kjb = new KJBitmap();
@@ -65,7 +68,7 @@ public class ActiveAdapter extends ListBaseAdapter {
     @Override
     @SuppressLint("InflateParams")
     protected View getRealView(int position, View convertView,
-            final ViewGroup parent) {
+                               final ViewGroup parent) {
         ViewHolder vh = null;
         initImageSize(parent.getContext());
         if (convertView == null || convertView.getTag() == null) {
@@ -88,6 +91,7 @@ public class ActiveAdapter extends ListBaseAdapter {
             vh.body.setVisibility(View.GONE);
         } else {
             // 设置TextView支持链接点击
+//            vh.body.setMovementMethod(LinkMovementMethod.getInstance());
             vh.body.setMovementMethod(MyLinkMovementMethod.a());
             // 不可获取焦点
             vh.body.setFocusable(false);
@@ -111,11 +115,12 @@ public class ActiveAdapter extends ListBaseAdapter {
                         .getResources(), span);
                 vh.body.append(span);
             } else {
-                // 内容的表情 [大兵] [大笑]
+
+                // 1. 内容的表情 [大兵] [大笑]
                 span = InputHelper.displayEmoji(parent.getContext().getResources(), span);
                 vh.body.setText(span);
             }
-            // 内容链接, 把<a href=""></a> 转成可点击区域
+            // 2. 内容链接, 把<a href=""></a> 转成可点击区域
             MyURLSpan.parseLinkText(vh.body, span);
         }
 
@@ -139,25 +144,25 @@ public class ActiveAdapter extends ListBaseAdapter {
 
         vh.from.setVisibility(View.VISIBLE);
         switch (item.getAppClient()) {
-        default:
-            vh.from.setText(R.string.from_web); // 不显示
-            vh.from.setVisibility(View.GONE);
-            break;
-        case Tweet.CLIENT_MOBILE:
-            vh.from.setText(R.string.from_mobile);
-            break;
-        case Tweet.CLIENT_ANDROID:
-            vh.from.setText(R.string.from_android);
-            break;
-        case Tweet.CLIENT_IPHONE:
-            vh.from.setText(R.string.from_iphone);
-            break;
-        case Tweet.CLIENT_WINDOWS_PHONE:
-            vh.from.setText(R.string.from_windows_phone);
-            break;
-        case Tweet.CLIENT_WECHAT:
-            vh.from.setText(R.string.from_wechat);
-            break;
+            default:
+                vh.from.setText(R.string.from_web); // 不显示
+                vh.from.setVisibility(View.GONE);
+                break;
+            case Tweet.CLIENT_MOBILE:
+                vh.from.setText(R.string.from_mobile);
+                break;
+            case Tweet.CLIENT_ANDROID:
+                vh.from.setText(R.string.from_android);
+                break;
+            case Tweet.CLIENT_IPHONE:
+                vh.from.setText(R.string.from_iphone);
+                break;
+            case Tweet.CLIENT_WINDOWS_PHONE:
+                vh.from.setText(R.string.from_windows_phone);
+                break;
+            case Tweet.CLIENT_WECHAT:
+                vh.from.setText(R.string.from_wechat);
+                break;
         }
 
         if (item.getCommentCount() > 0) {
@@ -182,11 +187,11 @@ public class ActiveAdapter extends ListBaseAdapter {
 
     /**
      * 动态设置图片显示样式
-     * 
+     *
      * @author kymjs
      */
     private void setTweetImage(final ViewGroup parent, final ViewHolder vh,
-            final Active item) {
+                               final Active item) {
         vh.pic.setVisibility(View.VISIBLE);
 
         kjb.display(vh.pic, item.getTweetimage(), R.drawable.pic_bg, rectSize,
@@ -212,11 +217,12 @@ public class ActiveAdapter extends ListBaseAdapter {
     }
 
     private String modifyPath(String message) {
+//        <a href="http://m.oschina.net/tweet-topic/90%8D">#【杭州】源创会第37期开始报名#</a>
         message = message.replaceAll("(<a[^>]+href=\")/([\\S]+)\"", "$1"
                 + AT_HOST_PRE + "/$2\"");
         message = message.replaceAll(
-                "(<a[^>]+href=\")http://m.oschina.net([\\S]+)\"", "$1"
-                        + MAIN_HOST + "$2\"");
+                "(<a[^>]+href=\")http://m.oschina.net([\\S]+)\"",
+                "$1" + MAIN_HOST + "$2\"");
         return message;
     }
 

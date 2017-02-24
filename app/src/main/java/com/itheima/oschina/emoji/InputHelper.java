@@ -15,7 +15,6 @@
  */
 package com.itheima.oschina.emoji;
 
-import com.itheima.oschina.R;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.text.Spannable;
@@ -23,6 +22,8 @@ import android.text.SpannableString;
 import android.text.style.ImageSpan;
 import android.view.KeyEvent;
 import android.widget.EditText;
+
+import com.itheima.oschina.R;
 
 /**
  * 
@@ -68,9 +69,10 @@ public class InputHelper {
         if (s instanceof Spannable) {
             spannable = (Spannable) s;
         } else {
-            // 构建文字span
+            // 构建文字 span
             spannable = new SpannableString(str);
         }
+        // sdkfhasdfhauh[大兵]saljdkgf78y76 :smily:
         for (int i = 0; i < str.length(); i++) {
             int index1 = str.indexOf("[", i);
             int length1 = str.indexOf("]", index1 + 1);
@@ -79,13 +81,14 @@ public class InputHelper {
             int bound = (int) res.getDimension(R.dimen.space_20);
             try {// [大兵]
                 String emojiStr = str.substring(index1, length1 + "]".length());
-                int resId = getEmojiResId(emojiStr);
+                int resId = getEmojiResId(emojiStr); // 将 字符串 -> 表情图片资源id
                 if (resId > 0) {
-                    // 构建图片span
+                    // 获取drawable图片
                     Drawable drawable = res.getDrawable(resId);
                     // 设置宽高
                     drawable.setBounds(0, 20, bound, bound + 20);
 
+                    // 构建图片span
                     // 将Drawable对象封装到ImageSpan
                     ImageSpan span = new ImageSpan(drawable, ImageSpan.ALIGN_BASELINE);
 

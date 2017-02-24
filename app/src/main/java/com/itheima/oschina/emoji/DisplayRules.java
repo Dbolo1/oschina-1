@@ -15,12 +15,12 @@
  */
 package com.itheima.oschina.emoji;
 
+import com.itheima.oschina.R;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.itheima.oschina.R;
 
 /**
  * Emoji在手机上的显示规则
@@ -32,8 +32,7 @@ public enum DisplayRules {
     // int type, int value, int resId, String cls
     KJEMOJI0(0, 1, R.drawable.smiley_0, "[微笑]", "[0]"),
     KJEMOJI1(0, 1,R.drawable.smiley_1, "[撇嘴]", "[1]"),
-    KJEMOJI2(0, 1,
-            R.drawable.smiley_2, "[色]", "[2]"), KJEMOJI3(0, 1,
+    KJEMOJI2(0, 1, R.drawable.smiley_2, "[色]", "[2]"), KJEMOJI3(0, 1,
             R.drawable.smiley_3, "[发呆]", "[3]"), KJEMOJI4(0, 1,
             R.drawable.smiley_4, "[得意]", "[4]"), KJEMOJI5(0, 1,
             R.drawable.smiley_5, "[流泪]", "[5]"), KJEMOJI6(0, 1,
